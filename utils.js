@@ -2,17 +2,26 @@ WorldWideFreedom.utils = {
   getDiv: function () {
     var div = document.createElement("div");
       
-    with (div.style) {
-        boxSizing = "border-box";
-        position = "absolute";
-        transition = 'all .25s';
-        overflow = "hidden";
-    }
+//     with (div.style) {
+//         boxSizing = "border-box";
+//         position = "absolute";
+//         transition = 'all 1s, background-color 100ms';
+//         overflow = "hidden";
+//     }
+    
+    div.id = ""+Math.random();
+    div.onclick = function (e) {
+      this.style.backgroundColor = WorldWideFreedom.utils.colourize();
+      console.log("CLICKED!!!!", e.srcElement.id);  
+    };
 
     return div;
   },
   insert: function (container, node) {
     return container.appendChild(node);
+  },
+  insertBefore: function (container, node) {
+    return container.insertBefore(node, container.firstChild);
   },
   render: function (node) {
       return document.body.appendChild(node);
@@ -21,7 +30,7 @@ WorldWideFreedom.utils = {
     return Math.floor(Math.random() * (max - min)) + min;
   },
   colourize: function () {
-        var i = WorldWideFreedom.utils.iColourize + 1;
+        var i = WorldWideFreedom.utils.iColourize + 2;
         var
             frequency1 = .3,
             frequency2 = .3,
@@ -44,5 +53,5 @@ WorldWideFreedom.utils = {
     }
 };
 
-WorldWideFreedom.utils.iColourize = 13 || WorldWideFreedom.utils.random(0, 10);
+WorldWideFreedom.utils.iColourize = 9 || WorldWideFreedom.utils.random(0, 10);
 console.log(WorldWideFreedom.utils.iColourize);

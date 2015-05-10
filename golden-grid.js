@@ -13,6 +13,13 @@ WorldWideFreedom.goldenGrid = function (left, up) {
     up = up || false;
     
     var frame = WorldWideFreedom.utils.getDiv;
+    var goldenFrame = function () {
+        var div = frame();
+        
+        div.classList.add("golden-frame");
+        
+        return div;
+    };
     var insert = WorldWideFreedom.utils.insert;
     var render = WorldWideFreedom.utils.render;
     var colorize = WorldWideFreedom.utils.colourize;
@@ -22,59 +29,12 @@ WorldWideFreedom.goldenGrid = function (left, up) {
     var container = frame();
     
     container.id = "golden-grid";
-    
-    with (container.style) {
-        width = "100vw";
-        height = "100vh";
-    }
-    
+
     var list = [];
-    var heightBuffer = 100;
-    var widthBuffer = 100;
-    var leftFactor = 200;
-    var leftBuffer;
-    var element;
-    var topBuffer = 0;
-    var topFactor = 100;
-    var i = -2;
-    var max = 10;
+    var max = 20;
     
     while (max--){
-    ///////////////////////////////////////////////////////
-        list.push(frame());
-        i += 2;
-        leftFactor = (200, leftFactor / 2);
-        leftBuffer = i && (0, leftBuffer + leftFactor);
-        topBuffer = (0, topBuffer);
-        heightBuffer = (50, heightBuffer / 2);
-        color = colorize();
-        element = list[list.length-1];
-        element.style.background = color;
-        console.log(color, leftBuffer, topBuffer, widthBuffer, heightBuffer, element);
-        with (element.style) {
-            left = (leftBuffer) + "vmin";
-            top = (topBuffer) + "vmax";
-            // backgroundColor = color; // FUCKING BUG!!!
-            width = (widthBuffer) + "vmin";
-            height = (heightBuffer) + "vmax";
-        }
-
-        list.push(frame());
-        topFactor = (100, topFactor / 2);
-        topBuffer = (50, topBuffer + topFactor);
-        widthBuffer = (50, widthBuffer / 2);
-        color = colorize();
-        element = list[list.length-1];
-        element.style.background = color;
-        console.log(color, leftBuffer, topBuffer, widthBuffer, heightBuffer, element);
-        with (element.style) {
-            // background = color; // FUCKING BUG!!!
-            left = (leftBuffer) + "vmin";
-            top = (topBuffer) + "vmax";
-            width = (widthBuffer) + "vmin";
-            height = (heightBuffer) + "vmax";
-        }
-    ///////////////////////////////////////////////////////
+        list.push(goldenFrame());
     }
     
     while (list.length) {
@@ -88,6 +48,20 @@ WorldWideFreedom.goldenGrid = function (left, up) {
 WorldWideFreedom.goldenGridScroll = function () {
     console.log("WorldWideFreedom.goldenGridScroll()");
     document.addEventListener("wheel", function (e) {
-        console.log(e.deltaY);
+        var container = window["golden-grid"];
+        var shifted = container.firstChild;
+        var poped = container.lastChild;
+        var div = WorldWideFreedom.utils.getDiv();
+        div.classList.add("golden-frame");
+        
+        if (e.deltaY > 0) {
+            console.log("--");
+            shifted && shifted.parentElement.removeChild(shifted);
+            WorldWideFreedom.utils.insert(container, div);
+        } else {
+            console.log("++");
+            poped && poped.parentElement.removeChild(poped);
+            WorldWideFreedom.utils.insertBefore(container, div);
+        }
     }, false);
 };

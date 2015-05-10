@@ -1,0 +1,65 @@
+
+
+#golden-grid:nth-child(){
+	background: #333;
+	left: 0vmin;
+	top: 0vmax;
+	width: 100vmin;
+	height: 50vmax;
+}
+
+#golden-grid:nth-child(){
+	background: #eee;
+	left: 0vmin;
+	top: 50vmax;
+	width: 50vmin;
+	height: 50vmax;
+}
+
+#golden-grid:nth-child(){
+	background: #ddd;
+	left: 50vmin;
+	top: 50vmax;
+	width: 50vmin;
+	height: 25vmax;
+}
+
+#golden-grid:nth-child(){
+	background: #ccc;
+	left: 50vmin;
+	top: 75vmax;
+	width: 25vmin;
+	height: 25vmax;
+}
+
+#golden-grid:nth-child(){
+	background: #bbb;
+	left: 75vmin;
+	top: 75vmax;
+	width: 25vmin;
+	height: 12.5vmax;
+}
+
+#golden-grid:nth-child(){
+	background: #aaa;
+	left: 75vmin;
+	top: 87.5vmax;
+	width: 12.5vmin;
+	height: 12.5vmax;
+}
+
+#golden-grid:nth-child(){
+	background: #999;
+	left: 87.5vmin;
+	top: 87.5vmax;
+	width: 12.5vmin;
+	height: 6.25vmax;
+}
+
+#golden-grid:nth-child(){
+	background: #888;
+	left: 87.5vmin;
+	top: 93.75vmax;
+	width: 6.25vmin;
+	height: 6.25vmax;
+}

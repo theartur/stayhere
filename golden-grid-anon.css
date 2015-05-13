@@ -1,8 +1,12 @@
+body, html {
+    background-color: #000;
+}
+
 #golden-grid {
 	box-sizing: border-box;
 	position: absolute;
 	transition: all 1s, background-color 100ms;
-	-webkit-transition: all 1s;
+	-webkit-transition: all 150ms;
 	overflow: hidden;
 	width: 100vw;
 	height: 100vh;
@@ -13,17 +17,22 @@
 	box-sizing: border-box;
 	position: absolute;
 	transition: all 1s, background-color 100ms;
-	-webkit-transition: all 1s, 
-                        left 750ms,
-                        top 750ms,
-                        width 750ms,
-                        height 750ms,
-                        background-color 750ms;
+	-webkit-transition: all 100ms;
 	overflow: hidden;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     background-color: rgba(255, 255, 255, .05);
+}
+
+#watermark {
+    position: absolute;
+    background-image: url(stayfilm-logo.png);
+    width: 132px;
+    height: 45px;
+    border: 0;
+    right: 20px;
+    bottom: 20px;
 }
 
 @media (orientation: portrait) {
@@ -32,6 +41,7 @@
         top: 0vmax;
         width: 100vmin;
         height: 50vmax;
+        opacity: 1;
     }
 
     #golden-grid .golden-frame:nth-child(2) {
@@ -39,6 +49,7 @@
         top: 50vmax;
         width: 50vmin;
         height: 50vmax;
+        opacity: .9;
     }
 
     #golden-grid .golden-frame:nth-child(3) {
@@ -46,6 +57,7 @@
         top: 50vmax;
         width: 50vmin;
         height: 25vmax;
+        opacity: .8;
     }
 
     #golden-grid .golden-frame:nth-child(4) {
@@ -53,6 +65,7 @@
         top: 75vmax;
         width: 25vmin;
         height: 25vmax;
+        opacity: .7;
     }
 
     #golden-grid .golden-frame:nth-child(5) {
@@ -60,6 +73,7 @@
         top: 75vmax;
         width: 25vmin;
         height: 12.5vmax;
+        opacity: .6;
     }
 
     #golden-grid .golden-frame:nth-child(6) {
@@ -67,6 +81,7 @@
         top: 87.5vmax;
         width: 12.5vmin;
         height: 12.5vmax;
+        opacity: .5;
     }
 
     #golden-grid .golden-frame:nth-child(7) {
@@ -74,6 +89,7 @@
         top: 87.5vmax;
         width: 12.5vmin;
         height: 6.25vmax;
+        opacity: .4;
     }
 
     #golden-grid .golden-frame:nth-child(8) {
@@ -81,6 +97,7 @@
         top: 93.75vmax;
         width: 6.25vmin;
         height: 6.25vmax;
+        opacity: .3;
     }
 
     #golden-grid .golden-frame:nth-child(9) {
@@ -88,6 +105,7 @@
         top: 93.75vmax;
         width: 6.25vmin;
         height: 3.125vmax;
+        opacity: .2;
     }
 
     #golden-grid .golden-frame:nth-child(10) {
@@ -95,6 +113,7 @@
         top: 96.875vmax;
         width: 3.125vmin;
         height: 3.125vmax;
+        opacity: .1;
     }
 
     #golden-grid .golden-frame:nth-child(11) {
@@ -102,6 +121,7 @@
         top: 96.875vmax;
         width: 3.125vmin;
         height: 1.5625vmax;
+        opacity: .50;
     }
 
     #golden-grid .golden-frame:nth-child(12) {
@@ -109,6 +129,7 @@
         top: 98.4375vmax;
         width: 1.5625vmin;
         height: 1.5625vmax;
+        opacity: .45;
     }
 
     #golden-grid .golden-frame:nth-child(13) {
@@ -116,6 +137,7 @@
         top: 98.4375vmax;
         width: 1.5625vmin;
         height: 0.78125vmax;
+        opacity: .40;
     }
 
     #golden-grid .golden-frame:nth-child(14) {
@@ -123,6 +145,7 @@
         top: 99.21875vmax;
         width: 0.78125vmin;
         height: 0.78125vmax;
+        opacity: .35;
     }
 
     #golden-grid .golden-frame:nth-child(15) {
@@ -130,6 +153,7 @@
         top: 99.21875vmax;
         width: 0.78125vmin;
         height: 0.390625vmax;
+        opacity: .30;
     }
 
     #golden-grid .golden-frame:nth-child(16) {
@@ -137,6 +161,7 @@
         top: 99.609375vmax;
         width: 0.390625vmin;
         height: 0.390625vmax;
+        opacity: .25;
     }
 
     #golden-grid .golden-frame:nth-child(17) {
@@ -144,6 +169,7 @@
         top: 99.609375vmax;
         width: 0.390625vmin;
         height: 0.1953125vmax;
+        opacity: .20;
     }
 
     #golden-grid .golden-frame:nth-child(18) {
@@ -151,6 +177,7 @@
         top: 99.8046875vmax;
         width: 0.1953125vmin;
         height: 0.1953125vmax;
+        opacity: .15;
     }
 
     #golden-grid .golden-frame:nth-child(19) {
@@ -158,6 +185,7 @@
         top: 99.8046875vmax;
         width: 0.1953125vmin;
         height: 0.09765625vmax;
+        opacity: .1;
     }
 
     #golden-grid .golden-frame:nth-child(20) {
@@ -165,6 +193,7 @@
         top: 99.90234375vmax;
         width: 0.09765625vmin;
         height: 0.09765625vmax;
+        opacity: .05;
     }
 }
 
@@ -174,6 +203,7 @@
         top: 0vmin;
         width: 50vmax;
         height: 100vmin;
+        opacity: 1;
     }
 
     #golden-grid .golden-frame:nth-child(2) {
@@ -181,6 +211,7 @@
         top: 0vmin;
         width: 50vmax;
         height: 50vmin;
+        opacity: .9;
     }
 
     #golden-grid .golden-frame:nth-child(3) {
@@ -188,6 +219,7 @@
         top: 50vmin;
         width: 25vmax;
         height: 50vmin;
+        opacity: .8;
     }
 
     #golden-grid .golden-frame:nth-child(4) {
@@ -195,6 +227,7 @@
         top: 50vmin;
         width: 25vmax;
         height: 25vmin;
+        opacity: .7;
     }
 
     #golden-grid .golden-frame:nth-child(5) {
@@ -202,6 +235,7 @@
         top: 75vmin;
         width: 12.5vmax;
         height: 25vmin;
+        opacity: .6;
     }
 
     #golden-grid .golden-frame:nth-child(6) {
@@ -209,6 +243,7 @@
         top: 75vmin;
         width: 12.5vmax;
         height: 12.5vmin;
+        opacity: .5;
     }
 
     #golden-grid .golden-frame:nth-child(7) {
@@ -216,6 +251,7 @@
         top: 87.5vmin;
         width: 6.25vmax;
         height: 12.5vmin;
+        opacity: .4;
     }
 
     #golden-grid .golden-frame:nth-child(8) {
@@ -223,6 +259,7 @@
         top: 87.5vmin;
         width: 6.25vmax;
         height: 6.25vmin;
+        opacity: .3;
     }
 
     #golden-grid .golden-frame:nth-child(9) {
@@ -230,6 +267,7 @@
         top: 93.75vmin;
         width: 3.125vmax;
         height: 6.25vmin;
+        opacity: .2;
     }
 
     #golden-grid .golden-frame:nth-child(10) {
@@ -237,6 +275,7 @@
         top: 93.75vmin;
         width: 3.125vmax;
         height: 3.125vmin;
+        opacity: .1;
     }
 
     #golden-grid .golden-frame:nth-child(11) {
@@ -244,6 +283,7 @@
         top: 96.875vmin;
         width: 1.5625vmax;
         height: 3.125vmin;
+        opacity: .50;
     }
 
     #golden-grid .golden-frame:nth-child(12) {
@@ -251,6 +291,7 @@
         top: 96.875vmin;
         width: 1.5625vmax;
         height: 1.5625vmin;
+        opacity: .45;
     }
 
     #golden-grid .golden-frame:nth-child(13) {
@@ -258,6 +299,7 @@
         top: 98.4375vmin;
         width: 0.78125vmax;
         height: 1.5625vmin;
+        opacity: .40;
     }
 
     #golden-grid .golden-frame:nth-child(14) {
@@ -265,6 +307,7 @@
         top: 98.4375vmin;
         width: 0.78125vmax;
         height: 0.78125vmin;
+        opacity: .35;
     }
 
     #golden-grid .golden-frame:nth-child(15) {
@@ -272,6 +315,7 @@
         top: 99.21875vmin;
         width: 0.390625vmax;
         height: 0.78125vmin;
+        opacity: .30;
     }
 
     #golden-grid .golden-frame:nth-child(16) {
@@ -279,6 +323,7 @@
         top: 99.21875vmin;
         width: 0.390625vmax;
         height: 0.390625vmin;
+        opacity: .25;
     }
 
     #golden-grid .golden-frame:nth-child(17) {
@@ -286,6 +331,7 @@
         top: 99.609375vmin;
         width: 0.1953125vmax;
         height: 0.390625vmin;
+        opacity: .20;
     }
 
     #golden-grid .golden-frame:nth-child(18) {
@@ -293,6 +339,7 @@
         top: 99.609375vmin;
         width: 0.1953125vmax;
         height: 0.1953125vmin;
+        opacity: .15;
     }
 
     #golden-grid .golden-frame:nth-child(19) {
@@ -300,6 +347,7 @@
         top: 99.8046875vmin;
         width: 0.09765625vmax;
         height: 0.1953125vmin;
+        opacity: .1;
     }
 
     #golden-grid .golden-frame:nth-child(20) {
@@ -307,6 +355,6 @@
         top: 99.8046875vmin;
         width: 0.09765625vmax;
         height: 0.09765625vmin;
+        opacity: .05;
     }
-/***/
 }

@@ -2,6 +2,8 @@
 
 WorldWideFreedom.avatar = {
     init: function () {
-        // implement d3
+        var watermark = document.createElement("div");
+        watermark.id = "watermark";
+        WorldWideFreedom.utils.insert(document.body, watermark);
     }
 };

@@ -10,7 +10,6 @@ WorldWideFreedom.utils = {
 //         overflow = "hidden";
 //     }
     
-    
     div.id = ""+Math.random();
     div.onclick = function (e) {
       e.stopPropagation();
@@ -21,7 +20,7 @@ WorldWideFreedom.utils = {
       
       
 //       this.style.backgroundColor = WorldWideFreedom.utils.colourize();
-        
+      
       WorldWideFreedom.goldenGridScrollHandler({ "deltaY": this === window["golden-grid"].firstChild ? 100 : -100 });
 
       //console.log("CLICKED!!!!", e.srcElement.id);  
@@ -103,6 +102,20 @@ WorldWideFreedom.utils = {
         var out = "rgb("+(~~red)+","+(~~grn)+","+(~~blu)+")";
         
         return out;
+   },
+   throttle: function throttle(omega) {
+        var alpha = +new Date, delta = 0;
+        return function throttled() {
+            delta += (+new Date - alpha);
+            console.log("> delta", delta);
+            console.log("alpha", alpha);
+            alpha = +new Date;
+            console.log("alpha, delta", alpha, delta);
+            if (delta > 500) {
+                delta = 0;
+                return omega.apply(this,arguments);
+            }
+        };
     }
 };
 

@@ -67,7 +67,7 @@ body, html {
         height: 50vmax;
         opacity: 1;
         -webkit-transition: all 250ms;
-        background-size: contain;
+        background-size: contain; /* maybe it's too heavy to change background-size like this */
     }
 
     #golden-grid .golden-frame:nth-child(2) {
@@ -250,7 +250,7 @@ body, html {
         height: 100vmin;
         opacity: 1;
         -webkit-transition: all 250ms;
-        background-size: contain;
+        background-size: contain; /* maybe it's too heavy to change background-size like this */
     }
 
     #golden-grid .golden-frame:nth-child(2) {

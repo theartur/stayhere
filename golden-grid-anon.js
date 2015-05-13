@@ -46,7 +46,7 @@ WorldWideFreedom.goldenGrid = function (left, up) {
     
 };
 
-WorldWideFreedom.goldenGridScrollHandler = function (e) {
+WorldWideFreedom.goldenGridScrollHandler = WorldWideFreedom.utils.throttle(function (e) {
     var container = window["golden-grid"];
     var shifted = container.firstChild;
     var lastChild = container.lastChild;
@@ -63,24 +63,11 @@ WorldWideFreedom.goldenGridScrollHandler = function (e) {
         WorldWideFreedom.utils.insertBefore(container, div);
         lastChild.parentElement.removeChild(lastChild);
     }
-};
-
-function throttle(omega) {
-    var alpha = +new Date;
-    return function throttled() {
-        var delta = +new Date - alpha;
-        alpha = +new Date;
-        
-        if (delta>16) {
-            return omega.apply(this,arguments);
-        }
-        
-    }
-}
+});
 
 WorldWideFreedom.goldenGridScroll = function () {
     console.log("WorldWideFreedom.goldenGridScroll()");
-    document.addEventListener("wheel", throttle(WorldWideFreedom.goldenGridScrollHandler), false);
+    document.addEventListener("wheel", WorldWideFreedom.goldenGridScrollHandler, false);
     
 //     interact(document)
 //       .draggable({

@@ -49,7 +49,10 @@ WorldWideFreedom.utils = {
         throw new Error("EMPTY URL ???");
     }
     
-    div.style.backgroundImage = "url(" + url + ")";
+    url = "url(\'" + url + "\')";
+    div.style.backgroundImage = url;
+    
+    console.log("URL: ", url);
     
     return div;
   },
@@ -58,8 +61,6 @@ WorldWideFreedom.utils = {
     var div = WorldWideFreedom.utils.getDiv();
     var counter = WorldWideFreedom.utils.getGoldenFrameSetupCounter;
     var url;
-    
-    div.classList.add("golden-frame");
     
     url = WorldWideFreedom.goldenGridAnon[counter];
       

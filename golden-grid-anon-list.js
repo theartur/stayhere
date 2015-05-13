@@ -104,5 +104,10 @@ WorldWideFreedom.goldenGridAnon = [];
 
 for (var i = 0; i < WorldWideFreedom.goldenGridAnonTemp.length; i++) {
     var rnd = Math.round(Math.random() * WorldWideFreedom.goldenGridAnonTemp.length);
-    WorldWideFreedom.goldenGridAnon.push(WorldWideFreedom.goldenGridAnonTemp.splice(rnd, 1));
+    var randomItem = WorldWideFreedom.goldenGridAnonTemp.splice(rnd, 1);
+    if (randomItem) {
+        WorldWideFreedom.goldenGridAnon.push(randomItem);
+    } else {
+        throw new Error("WorldWideFreedom.goldenGridAnonTemp[" + randomItem + "] is TROUBLED!");
+    }
 }

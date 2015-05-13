@@ -15,6 +15,8 @@ WorldWideFreedom.goldenGrid = function (left, up) {
     var insert = WorldWideFreedom.utils.insert;
     var render = WorldWideFreedom.utils.render;
     var colorize = WorldWideFreedom.utils.colourize;
+    var anims = WorldWideFreedom.animationsAvailable;
+    var rnd = WorldWideFreedom.utils.random;
     
     document.body.style.margin = 0;
     
@@ -29,8 +31,15 @@ WorldWideFreedom.goldenGrid = function (left, up) {
         list.push(goldenFrameSetup());
     }
     
+    var div, rndAnim;
     while (list.length) {
-        insert(container, list.shift());
+        div = list.shift();
+        insert(container, div);
+//         RANDOM ANIMATIONS ON START:
+//         div.classList.add("animated");
+//         rndAnim = anims[rnd(0, anims.length-1)];
+//         div.classList.add(rndAnim);
+        div.classList.add("golden-frame");
     }
     
     render(container);
@@ -56,9 +65,22 @@ WorldWideFreedom.goldenGridScrollHandler = function (e) {
     }
 };
 
+function throttle(omega) {
+    var alpha = +new Date;
+    return function throttled() {
+        var delta = +new Date - alpha;
+        alpha = +new Date;
+        
+        if (delta>16) {
+            return omega.apply(this,arguments);
+        }
+        
+    }
+}
+
 WorldWideFreedom.goldenGridScroll = function () {
     console.log("WorldWideFreedom.goldenGridScroll()");
-    document.addEventListener("wheel", WorldWideFreedom.goldenGridScrollHandler, false);
+    document.addEventListener("wheel", throttle(WorldWideFreedom.goldenGridScrollHandler), false);
     
 //     interact(document)
 //       .draggable({

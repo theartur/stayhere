@@ -13,12 +13,12 @@ body, html {
 	background-color: #000;
 }
 
-#golden-grid div {
+xxxxxxxxx#golden-grid div {
     right: 0;
     bottom: 0;
     width: 0;
     height: 0;
-    opacity: 0;
+/* *********************** opacity: 0; */
 }
 
 #golden-grid .golden-frame {
@@ -38,6 +38,23 @@ body, html {
     transform: scale(1.05);
 }
 
+#golden-grid .golden-frame img {
+    opacity: 0;
+}
+
+#golden-grid .golden-frame .face {
+    position: absolute;
+    border: 3px solid #fff;
+    border-radius: 4px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+    opacity: 1;
+}
+
+#golden-grid .golden-frame .recog-container {
+    border: 1px solid red;
+    position: relative;
+    margin: -25% 0 0;
+}
 #watermark {
     position: absolute;
     background-image: url(stayfilm-logo.png);
@@ -52,6 +69,12 @@ body, html {
     overflow: hidden;
     background-repeat: no-repeat;
     opacity: 0.8;
+}
+
+.vertical-align {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 #watermark span {

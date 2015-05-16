@@ -1,90 +1,141 @@
-
 WorldWideFreedom.utils = {
-  getDiv: function () {
-    var div = document.createElement("div");
-      
-//     with (div.style) {
-//         boxSizing = "border-box";
-//         position = "absolute";
-//         transition = 'all 1s, background-color 100ms';
-//         overflow = "hidden";
-//     }
-    
-    div.id = ""+Math.random();
-    div.onclick = function (e) {
-      e.stopPropagation();
-      
-      if (this === window["golden-grid"]) {
-          return;
-      }
-      
-      
-//       this.style.backgroundColor = WorldWideFreedom.utils.colourize();
-      
-      WorldWideFreedom.goldenGridScrollHandler({ "deltaY": this === window["golden-grid"].firstChild ? 100 : -100 });
+    getDiv: function () {
+        var div = document.createElement("div");
 
-      //console.log("CLICKED!!!!", e.srcElement.id);  
-    };
+        //     with (div.style) {
+        //         boxSizing = "border-box";
+        //         position = "absolute";
+        //         transition = 'all 1s, background-color 100ms';
+        //         overflow = "hidden";
+        //     }
 
-    return div;
-  },
-  getGoldenFrame: function (invertList) {
-    var div = WorldWideFreedom.utils.getDiv();
-    var url;
-    
-    div.classList.add("golden-frame");
-    
-    //console.log(WorldWideFreedom.goldenGridAnon.join("\n"));
-    
-    if (invertList) {
-        url = WorldWideFreedom.goldenGridAnon.pop();
-        WorldWideFreedom.goldenGridAnon.unshift(url);
-    } else {
-        url = WorldWideFreedom.goldenGridAnon.shift();
-        WorldWideFreedom.goldenGridAnon.push(url);
-    }
-      
-    if (url == "") {
-        throw new Error("EMPTY URL ???");
-    }
-    
-    url = "url(\'" + url + "\')";
-    div.style.backgroundImage = url;
-    
-    console.log("URL: ", url);
-    
-    return div;
-  },
-  getGoldenFrameSetupCounter: 0,
-  getGoldenFrameSetup: function () {
-    var div = WorldWideFreedom.utils.getDiv();
-    var counter = WorldWideFreedom.utils.getGoldenFrameSetupCounter;
-    var url;
-    
-    url = WorldWideFreedom.goldenGridAnon[counter];
-      
-    WorldWideFreedom.utils.getGoldenFrameSetupCounter++;
-    
-    div.style.backgroundImage = "url('" + url + "')";
-    
-    return div;
-  },
-  insert: function (container, node) {
-    return container.appendChild(node);
-  },
-  insertBefore: function (container, node) {
-    return container.insertBefore(node, container.firstChild);
-  },
-  render: function (node) {
-      return document.body.appendChild(node);
-  },
-  random: function (min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-  },
-  colourize: function () {
+        div.id = ""+Math.random();
+
+
+        return div;
+    },
+    getGoldenFrame: function (invertList) {
+        var div = WorldWideFreedom.utils.getDiv();
+        var clickHandler = WorldWideFreedom.utils.goldenFrameClickHandler;
+        var url;
+
+        div.onclick = clickHandler;
+
+        div.classList.add("golden-frame");
+
+        //console.log(WorldWideFreedom.goldenGridAnon.join("\n"));
+
+        if (invertList) {
+            url = WorldWideFreedom.goldenGridAnon.pop();
+            WorldWideFreedom.goldenGridAnon.unshift(url);
+        } else {
+            url = WorldWideFreedom.goldenGridAnon.shift();
+            WorldWideFreedom.goldenGridAnon.push(url);
+        }
+
+        if (url == "") {
+            console.log("EMPTY URL ???", url);
+        }
+
+        url = "url(\'" + url + "\')";
+        div.style.backgroundImage = url;
+
+               console.log("URL: ", url);
+
+        return div;
+    },
+    getGoldenFrameSetupCounter: 0,
+    getGoldenFrameSetup: function () {
+        var div = WorldWideFreedom.utils.getDiv();
+        var clickHandler = WorldWideFreedom.utils.goldenFrameClickHandler;
+        var counter = WorldWideFreedom.utils.getGoldenFrameSetupCounter;
+        var url;
+
+        div.onclick = clickHandler;
+
+        url = WorldWideFreedom.goldenGridAnon[counter];
+
+        WorldWideFreedom.utils.getGoldenFrameSetupCounter++;
+
+        div.style.backgroundImage = "url('" + url + "')";
+
+        return div;
+    },
+    goldenFrameClickHandler: function (e) {
+        e.stopPropagation();
+
+        if (this === window["golden-grid"]) {
+            return;
+        }
+
+        // SCROLL BABY SCROLL ! ! !
+        WorldWideFreedom.goldenGridScrollHandler({ "deltaY": this === window["golden-grid"].firstChild ? 100 : -100 });
+
+        function recognizeFaces () {
+            var thisImage = this;
+            var imgUrl = this.style.backgroundImage;
+            imgUrl = imgUrl.substr(4, imgUrl.length-5);
+            var width = $(this).width();
+            var height = $(this).height();
+            var renderImg = $('<img src="' + imgUrl + '" width="' + width + '">');
+            console.log(">>>>>>>>>THIS", this);
+            renderImg.appendTo(this);
+
+//             tamanho do container
+//             tamanho da imagem
+//             centro dos dois
+            
+            
+            
+            
+            
+            var recogContainer = $('<div class="recog-container vertical-align"></div>').css({height:renderImg.height()});
+
+            renderImg.faceDetection({
+                complete: function (faces) {
+                    console.log(faces);
+
+                    for (var i = 0; i < faces.length; i++) {
+                        $('<div>', {
+                            'class':'face',
+                            'css': {
+                                'position': 'absolute',
+                                'left':     faces[i].x * faces[i].scaleX + 'px',
+                                'top':      faces[i].y * faces[i].scaleY + 'px',
+                                'width':    faces[i].width  * faces[i].scaleX + 'px',
+                                'height':   faces[i].height * faces[i].scaleY + 'px'
+                            }
+                        })
+                            .appendTo(recogContainer);
+                    }
+                    $(thisImage).append(recogContainer);
+                },
+                error:function (code, message) {
+                    alert('Ops... ' + message);
+                }
+            });
+        }
+        
+        //recognizeFaces.apply(this);
+
+        //console.log("CLICKED!!!!", e.srcElement.id);  
+    },
+    insert: function (container, node) {
+        return container.appendChild(node);
+    },
+    insertBefore: function (container, node) {
+        return container.insertBefore(node, container.firstChild);
+    },
+    render: function (node) {
+        return document.body.appendChild(node);
+    },
+    random: function (min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+    },
+    colourize: function () {
         var i = WorldWideFreedom.utils.iColourize + 2;
         var
-            frequency1 = .3,
+        frequency1 = .3,
             frequency2 = .3,
             frequency3 = .3,
             phase1 = 0,
@@ -98,20 +149,17 @@ WorldWideFreedom.utils = {
         var grn = Math.sin(frequency2*i + phase2) * width + center;
         var blu = Math.sin(frequency3*i + phase3) * width + center;
         WorldWideFreedom.utils.iColourize = i;
-        
+
         var out = "rgb("+(~~red)+","+(~~grn)+","+(~~blu)+")";
-        
+
         return out;
-   },
-   throttle: function throttle(omega) {
+    },
+    throttle: function throttle(omega) {
         var alpha = +new Date, delta = 0;
         return function throttled() {
-            delta += (+new Date - alpha);
-            console.log("> delta", delta);
-            console.log("alpha", alpha);
-            alpha = +new Date;
-            console.log("alpha, delta", alpha, delta);
-            if (delta > 500) {
+            delta = (+new Date - alpha);
+            if (delta > 300) {
+                alpha = +new Date;
                 delta = 0;
                 return omega.apply(this,arguments);
             }
